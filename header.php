@@ -63,9 +63,9 @@ require("config.php");
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="<?php echo basename($_SERVER["PHP_SELF"]) == "home.php" ? "active" : ""; ?>"><a href="index.php">Home</a></li>
+                        <li class="<?php echo basename($_SERVER["PHP_SELF"]) == "home.php" ? "active" : ""; ?>"><a href="home.php">Home</a></li>
                         <li class="<?php echo basename($_SERVER["PHP_SELF"]) == "blog.php" ? "active" : ""; ?>"><a href="blog.php">Blog</a></li>
-                        <li class="<?php echo basename($_SERVER["PHP_SELF"]) == "about us.php" ? "active" : ""; ?>"><a href="aboutus.php">About Us</a></li>
+                        <li class="<?php echo basename($_SERVER["PHP_SELF"]) == "about us.php" ? "active" : ""; ?>"><a href="about us.php">About Us</a></li>
                     </ul>
                 </div>
                 <div class="search">
