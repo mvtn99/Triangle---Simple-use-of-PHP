@@ -23,7 +23,7 @@ $posts = $db->query($query);
 <section id="blog" class="padding-top">
     <div class="container">
         <div class="row">
-            <div class="col-md-9 col-sm-7 pr-5">
+            <div class="col-md-9 col-sm-7 pe-5">
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
                         <div class="single-blog single-column">
