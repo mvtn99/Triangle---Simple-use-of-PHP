@@ -186,6 +186,7 @@ h3 {
   position: absolute;
   right: 10px;
   top: 2px;
+  font-size: 18px !important;
 }
 
 .field-toggle {
