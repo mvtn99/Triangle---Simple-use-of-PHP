@@ -31,9 +31,9 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="index.php">Home</a></li>
-                    <li class="dropdown"><a href="blog.php">Blog</a></li>
-                    <li><a href="aboutus.php">About Us</a></li>
+                    <li class="<?php basename($_SERVER["PHP_SELF"]) == "index.php" && echo "active" ?>"><a href="index.php">Home</a></li>
+                    <li class="<?php basename($_SERVER["PHP_SELF"]) == "blog.php" && echo "active" ?>"><a href="blog.php">Blog</a></li>
+                    <li class="<?php basename($_SERVER["PHP_SELF"]) == "aboutus.php" && echo "active" ?>"><a href="aboutus.php">About Us</a></li>
                 </ul>
             </div>
             <div class="search">
