@@ -1,9 +1,17 @@
 <?php
 require("header.php");
-$query = "SELECT * FROM posts";
 
-$posts = $db->query($query);
-
+if (isset($_GET["category"])) {
+    $query = "SELECT * FROM posts WHERE category_id=$_GET[category]";
+    $posts = $db->query($query);
+} else if (isset($_GET["search"])) {
+    $keyword = $_GET['search'];
+    $posts = $db->prepare("SELECT * FROM posts WHERE title LIKE :keyword");
+    $posts->execute(['keyword' => "%$keyword%"]);
+} else {
+    $query = "SELECT * FROM posts";
+    $posts = $db->query($query);
+}
 ?>
 
 <section id="page-breadcrumb">
@@ -28,32 +36,42 @@ $posts = $db->query($query);
             <div class="col-md-9 col-sm-7">
                 <div class="row">
                     <?php
-                    foreach ($posts as $post) {
-                        $query1 = "SELECT * FROM categories WHERE id=$post[id]";
-                        $categories = $db->query($query1)->fetch();
-                        $query2 = "SELECT * FROM comments WHERE post_id=$post[id]";
-                        $comment = $db->query($query2);
+                    if ($posts->rowCount() > 0) {
+                        foreach ($posts as $post) {
+                            $query1 = "SELECT * FROM categories WHERE id=$post[id]";
+                            $category = $db->query($query1)->fetch();
+                            $query2 = "SELECT * FROM comments WHERE post_id=$post[id] AND status=1";
+                            $comment = $db->query($query2);
                     ?>
-                        <div class="col-sm-12 col-md-12">
-                            <div class="single-blog single-column">
-                                <div class="post-thumb">
-                                    <a href="blogdetails.php?post=<?php echo $post['id'] ?>"><img src="images/posts/<?php echo $post['image'] ?>.png" class="img-responsive" alt=""></a>
-                                    <div class="post-overlay">
-                                        <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="single-blog single-column">
+                                    <div class="post-thumb">
+                                        <a href="blogdetails.php?post=<?php echo $post['id'] ?>"><img src="images/posts/<?php echo $post['image'] ?>.png" class="img-responsive" alt=""></a>
+                                        <div class="post-overlay">
+                                            <span class="uppercase"><a href="#"><?php echo date("d", strtotime($post["date"])) ?><br><small><?php echo substr(date("F", strtotime($post["date"])), 0, 3) ?></small></a></span>
+                                        </div>
+                                    </div>
+                                    <div class="post-content overflow">
+                                        <h2 class="post-title bold"><a href="blogdetails.php?post=<?php echo $post['id'] ?>"><?php echo $post['title'] ?></a></h2>
+                                        <h3 class="post-author"><a href="#">Posted by <?php echo $post['author'] ?></a></h3>
+                                        <p><?php echo substr($post['body'], 0, 200) ?> [...]</p>
+                                        <a href="blogdetails.php?post=<?php echo $post['id'] ?>" class="read-more">View More</a>
+                                        <div class="post-bottom overflow">
+                                            <ul class="nav navbar-nav post-nav">
+                                                <li><a href="blog.php?category=<?php echo $category["id"] ?>"><i class="fa fa-tag"></i><?php echo $category['name'] ?></a></li>
+                                                <li><a href="#"><i class="fa fa-comments"></i><?php echo $comment->rowCount() ?> Comments</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="post-content overflow">
-                                    <h2 class="post-title bold"><a href="blogdetails.php?post=<?php echo $post['id'] ?>"><?php echo $post['title'] ?></a></h2>
-                                    <h3 class="post-author"><a href="#">Posted by <?php echo $post['author'] ?></a></h3>
-                                    <p><?php echo substr($post['body'], 0, 200) ?> [...]</p>
-                                    <a href="blogdetails.php?post=<?php echo $post['id'] ?>" class="read-more">View More</a>
-                                    <div class="post-bottom overflow">
-                                        <ul class="nav navbar-nav post-nav">
-                                            <li><a href="#"><i class="fa fa-tag"></i><?php echo $categories['name'] ?></a></li>
-                                            <li><a href="#"><i class="fa fa-comments"></i><?php echo $comment->rowCount() ?> Comments</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            </div>
+                        <?php
+                        }
+                    } else {
+                        ?>
+                        <div class="col">
+                            <div class="alert alert-danger">
+                                Could't find anything!!
                             </div>
                         </div>
                     <?php

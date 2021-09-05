@@ -69,10 +69,11 @@ require("config.php");
                     </ul>
                 </div>
                 <div class="search">
-                    <form role="form">
+                    <form role="form" action="blog.php">
                         <i class="fa fa-search"></i>
                         <div class="field-toggle">
-                            <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                            <input name="search" type="text" class="search-form" autocomplete="off">
+                            <button type="submit" class="btn btn-common">Search</button>
                         </div>
                     </form>
                 </div>
