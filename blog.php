@@ -1,7 +1,9 @@
 <?php
 require("header.php");
 $query = "SELECT * FROM posts";
+
 $posts = $db->query($query);
+
 ?>
 
 <section id="page-breadcrumb">
@@ -25,75 +27,38 @@ $posts = $db->query($query);
         <div class="row">
             <div class="col-md-9 col-sm-7">
                 <div class="row">
-                    <div class="col-sm-12 col-md-12">
-                        <div class="single-blog single-column">
-                            <div class="post-thumb">
-                                <a href="blogdetails.html"><img src="images/blog/7.jpg" class="img-responsive" alt=""></a>
-                                <div class="post-overlay">
-                                    <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
+                    <?php
+                    foreach ($posts as $post) {
+                        $query1 = "SELECT * FROM categories WHERE id=$post[id]";
+                        $categories = $db->query($query1)->fetch();
+                        $query2 = "SELECT * FROM comments WHERE post_id=$post[id]";
+                        $comment = $db->query($query2);
+                    ?>
+                        <div class="col-sm-12 col-md-12">
+                            <div class="single-blog single-column">
+                                <div class="post-thumb">
+                                    <a href="blogdetails.php?post=<?php echo $post['id'] ?>"><img src="images/posts/<?php echo $post['image'] ?>.png" class="img-responsive" alt=""></a>
+                                    <div class="post-overlay">
+                                        <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="post-content overflow">
-                                <h2 class="post-title bold"><a href="blogdetails.html">Advanced business cards design</a></h2>
-                                <h3 class="post-author"><a href="#">Posted by micron News</a></h3>
-                                <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber [...]</p>
-                                <a href="#" class="read-more">View More</a>
-                                <div class="post-bottom overflow">
-                                    <ul class="nav navbar-nav post-nav">
-                                        <li><a href="#"><i class="fa fa-tag"></i>Creative</a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i>32 Love</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12">
-                        <div class="single-blog single-column">
-                            <div class="post-thumb">
-                                <a href="blogdetails.html"><img src="images/blog/8.jpg" class="img-responsive" alt=""></a>
-                                <div class="post-overlay">
-                                    <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
-                                </div>
-                            </div>
-                            <div class="post-content overflow">
-                                <h2 class="post-title bold"><a href="blogdetails.html">Advanced business cards design</a></h2>
-                                <h3 class="post-author"><a href="#">Posted by micron News</a></h3>
-                                <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber [...]</p>
-                                <a href="#" class="read-more">View More</a>
-                                <div class="post-bottom overflow">
-                                    <ul class="nav navbar-nav post-nav">
-                                        <li><a href="#"><i class="fa fa-tag"></i>Creative</a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i>32 Love</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li>
-                                    </ul>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="blogdetails.php?post=<?php echo $post['id'] ?>"><?php echo $post['title'] ?></a></h2>
+                                    <h3 class="post-author"><a href="#">Posted by <?php echo $post['author'] ?></a></h3>
+                                    <p><?php echo substr($post['body'], 0, 200) ?> [...]</p>
+                                    <a href="blogdetails.php?post=<?php echo $post['id'] ?>" class="read-more">View More</a>
+                                    <div class="post-bottom overflow">
+                                        <ul class="nav navbar-nav post-nav">
+                                            <li><a href="#"><i class="fa fa-tag"></i><?php echo $categories['name'] ?></a></li>
+                                            <li><a href="#"><i class="fa fa-comments"></i><?php echo $comment->rowCount() ?> Comments</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12">
-                        <div class="single-blog single-column">
-                            <div class="post-thumb">
-                                <a href="blogdetails.html"><img src="images/blog/9.jpg" class="img-responsive" alt=""></a>
-                                <div class="post-overlay">
-                                    <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
-                                </div>
-                            </div>
-                            <div class="post-content overflow">
-                                <h2 class="post-title bold"><a href="blogdetails.html">Advanced business cards design</a></h2>
-                                <h3 class="post-author"><a href="#">Posted by micron News</a></h3>
-                                <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber [...]</p>
-                                <a href="#" class="read-more">View More</a>
-                                <div class="post-bottom overflow">
-                                    <ul class="nav navbar-nav post-nav">
-                                        <li><a href="#"><i class="fa fa-tag"></i>Creative</a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i>32 Love</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <?php include("sidebar.php") ?>

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="main-slider">
                 <div class="slide-text">
-                    <h1>We Are Creative Nerds</h1>
+                    <h1>You Are Creative Nerds</h1>
                     <p>Boudin doner frankfurter pig. Cow shank bresaola pork loin tri-tip tongue venison pork belly meatloaf short loin landjaeger biltong beef ribs shankle chicken andouille.</p>
 
                 </div>
