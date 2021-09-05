@@ -14,19 +14,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark <?php echo basename($_SERVER["PHP_SELF"]) == "categories.php" ? "active" : "" ?>">
+                    <a href="categories.php" class="nav-link link-dark <?php echo basename($_SERVER["PHP_SELF"]) == "categories.php" ? "active" : "" ?>">
                         <big><i class="fas fa-folder-open me-1"></i></big>
                         Category
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark <?php echo basename($_SERVER["PHP_SELF"]) == "posts.php" ? "active" : "" ?>">
+                    <a href="posts.php" class="nav-link link-dark <?php echo basename($_SERVER["PHP_SELF"]) == "posts.php" ? "active" : "" ?>">
                         <big><i class="fas fa-file-image me-1"></i></big>
                         Post
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark <?php echo basename($_SERVER["PHP_SELF"]) == "comments.php" ? "active" : "" ?>">
+                    <a href="comments.php" class="nav-link link-dark <?php echo basename($_SERVER["PHP_SELF"]) == "comments.php" ? "active" : "" ?>">
                         <big><i class="fas fa-comments me-1"></i></big>
                         Comment
                     </a>
