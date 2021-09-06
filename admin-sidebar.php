@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-3">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-my shadow fixed-top" style="width: 250px; height: 100%">
             <div href="#" class="d-flex my-2 justify-content-center">
                 <span class="fs-4">Admin Panel</span>

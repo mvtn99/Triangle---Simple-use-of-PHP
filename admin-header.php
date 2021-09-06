@@ -15,6 +15,8 @@ require("config.php");
     <link href="css/responsive.css" rel="stylesheet">
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+
 </head>
 
 <body>

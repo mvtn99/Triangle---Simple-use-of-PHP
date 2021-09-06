@@ -383,6 +383,10 @@ ul.sub-menu {
 *******Footer******
 **************************/
 
+.ck-editor__editable_inline {
+  min-height: 500px;
+}
+
 #footer {
   padding-bottom: 10px;
   background-image: url(../images/home/footer.png);
@@ -493,10 +497,10 @@ ul.sub-menu {
 
 .btn-submit {
   width: 100%;
-  background-color: #4fcccd;
+  background-color: #12a7a7;
   color: #fff;
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 400;
   letter-spacing: 5px;
   text-transform: uppercase;
   border-radius: 3px;
@@ -505,6 +509,7 @@ ul.sub-menu {
   -webkit-box-shadow: none;
   box-shadow: none;
   padding: 10px;
+  transition: all 0.3s;
 }
 
 .btn-submit:hover,

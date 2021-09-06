@@ -30,7 +30,7 @@ $query_categories = "SELECT * FROM categories";
 $categories = $db->query($query_categories);
 
 ?>
-<div class="col-md-9">
+<div class="col-9">
     <div class="container">
         <div class="my-5">
             <h1>Dashboard</h1>
@@ -96,33 +96,47 @@ $categories = $db->query($query_categories);
         <div class="my-4">
             <h2>Latest Comments</h2>
         </div>
-        <table class="table table-striped table-hover align-middle">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Comment</th>
-                    <th>Modify</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($comments as $comment) {
-                ?>
+        <?php
+        if ($comments->rowCount() > 0) {
+        ?>
+            <table class="table table-striped table-hover align-middle">
+                <thead>
                     <tr>
-                        <td><?php echo $comment["id"] ?></td>
-                        <td><?php echo $comment["name"] ?></td>
-                        <td><?php echo $comment["text"] ?></td>
-                        <td>
-                            <a class="btn btn-outline-info mb-1" href="dashboard.php?action=approve&entity=comment&id=<?php echo $comment["id"] ?>">Approve</a>
-                            <a class="btn btn-outline-danger" href="dashboard.php?action=delete&entity=comment&id=<?php echo $comment["id"] ?>">Delete</a>
-                        </td>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Comment</th>
+                        <th>Modify</th>
                     </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($comments as $comment) {
+                    ?>
+                        <tr>
+                            <td><?php echo $comment["id"] ?></td>
+                            <td><?php echo $comment["name"] ?></td>
+                            <td><?php echo $comment["text"] ?></td>
+                            <td>
+                                <a class="btn btn-outline-success mb-1" href="dashboard.php?action=approve&entity=comment&id=<?php echo $comment["id"] ?>">Approve</a>
+                                <a class="btn btn-outline-danger" href="dashboard.php?action=delete&entity=comment&id=<?php echo $comment["id"] ?>">Delete</a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        <?php
+        } else {
+        ?>
+            <div class="col">
+                <div class="alert alert-warning">
+                    There is no new comment!!
+                </div>
+            </div>
+        <?php
+        }
+        ?>
     </div>
 </div>
 </div><br><br><br><br>

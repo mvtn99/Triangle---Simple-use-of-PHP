@@ -1,9 +1,12 @@
-<?php require("header.php"); ?>
-<?php
+<?php require("header.php");
+
 if (isset($_GET["post"])) {
     $post_id = $_GET["post"];
     $query_post = "SELECT * FROM posts WHERE id=$post_id";
-    $post = $db->query($query_post)->fetch();
+    if (!$post = $db->query($query_post)->fetch()) {
+        header("location: 404.html");
+        exit();
+    }
     $query_category = "SELECT * FROM categories WHERE id=$post[category_id]";
     $category = $db->query($query_category)->fetch();
     $query_comment = "SELECT * FROM comments WHERE post_id=$post_id AND status=1";
@@ -11,6 +14,41 @@ if (isset($_GET["post"])) {
 } else {
     header("location: 404.html");
     exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (trim($_POST["name"]) != "" && trim($_POST["email"]) != "" && trim($_POST["text"]) != "") {
+        if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+            $name = $_POST["name"];
+            $email = $_POST["email"];
+            $text = $_POST["text"];
+            $query = $db->prepare("INSERT INTO comments (name, email, text, post_id) VALUES (:name, :email, :text, :post_id)");
+            $query->execute(['name' => $name, 'email' => $email, 'text' => $text, 'post_id' => $post_id]);
+?>
+            <div class="col">
+                <div class="alert alert-success">
+                    Your comment is submited!!
+                </div>
+            </div>
+        <?php
+        } else {
+        ?>
+            <div class="col">
+                <div class="alert alert-warning">
+                    Enter a valid email!!
+                </div>
+            </div>
+        <?php
+        }
+    } else {
+        ?>
+        <div class="col">
+            <div class="alert alert-warning">
+                Fill all the forms!!
+            </div>
+        </div>
+<?php
+    }
 }
 ?>
 <section id="page-breadcrumb">
@@ -56,6 +94,21 @@ if (isset($_GET["post"])) {
                                 <div class="author-profile padding">
                                 </div>
                                 <div class="response-area">
+                                    <h2 class="bold">Write a comment</h2>
+                                    <form id="comment-form" name="comment-form" method="post" action="blogdetails.php?post=<?php echo $post_id ?>">
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" required placeholder="Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="email" class="form-control" required placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea name="text" id="message" required class="form-control" rows="8" placeholder="Write your comment"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" name="submit" class="btn btn-submit" value="Submit">
+                                        </div>
+                                    </form><br><br>
                                     <h2 class="bold">Comments</h2>
                                     <ul class="media-list">
                                         <?php

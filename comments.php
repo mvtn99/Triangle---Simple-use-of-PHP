@@ -4,9 +4,23 @@ require("admin-sidebar.php");
 
 $query_comments = "SELECT * FROM comments";
 $comments = $db->query($query_comments);
+
+if (isset($_GET["action"]) && isset($_GET["id"])) {
+    $action = $_GET["action"];
+    $id = $_GET["id"];
+    if ($action == "approve") {
+        $query = $db->prepare("UPDATE comments SET status='1' WHERE id=:id");
+        $query->execute(["id" => $id]);
+    } else {
+
+        $query = $db->prepare("DELETE FROM comments WHERE id=:id");
+        $query->execute(['id' => $id]);
+    }
+    header("location: comments.php");
+}
 ?>
 
-<div class="col-md-9">
+<div class="col-9">
     <div class="container">
         <div class="my-4">
             <h2>Comments</h2>
@@ -29,8 +43,18 @@ $comments = $db->query($query_comments);
                         <td><?php echo $comment["name"] ?></td>
                         <td><?php echo $comment["text"] ?></td>
                         <td>
-                            <a class="btn btn-outline-info mb-1" href="dashboard.php?action=approve&entity=comment&id=<?php echo $comment["id"] ?>">Approve</a>
-                            <a class="btn btn-outline-danger" href="dashboard.php?action=delete&entity=comment&id=<?php echo $comment["id"] ?>">Delete</a>
+                            <?php
+                            if ($comment['status']) {
+                            ?>
+                                <span class="badge bg-success mb-1 p-2" href="#">Approved</span>
+                            <?php
+                            } else {
+                            ?>
+                                <a class="btn btn-outline-success mb-1" href="comments.php?action=approve&id=<?php echo $comment["id"] ?>">Approve</a>
+                            <?php
+                            }
+                            ?>
+                            <a class="btn btn-outline-danger" href="comments.php?action=delete&id=<?php echo $comment["id"] ?>">Delete</a>
                         </td>
                     </tr>
                 <?php
