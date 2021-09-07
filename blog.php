@@ -46,7 +46,7 @@ if (isset($_GET["category"])) {
                             <div class="col-sm-12 col-md-12">
                                 <div class="single-blog single-column">
                                     <div class="post-thumb">
-                                        <a href="blogdetails.php?post=<?php echo $post['id'] ?>"><img src="images/posts/<?php echo $post['image'] ?>.png" class="img-responsive" alt=""></a>
+                                        <a href="blogdetails.php?post=<?php echo $post['id'] ?>"><img style="height: auto;" src="images/posts/<?php echo $post['image'] ?>" class="img-responsive" alt=""></a>
                                         <div class="post-overlay">
                                             <span class="uppercase"><a href="#"><?php echo date("d", strtotime($post["date"])) ?><br><small><?php echo substr(date("F", strtotime($post["date"])), 0, 3) ?></small></a></span>
                                         </div>

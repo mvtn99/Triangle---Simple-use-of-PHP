@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $img_name = $_FILES["image"]["name"];
         $tmp_name = $_FILES["image"]["tmp_name"];
         if (move_uploaded_file($tmp_name, "./images/posts/$img_name")) {
+
     ?>
             <div class="col">
                 <div class="alert alert-success">
@@ -39,10 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
 <?php
-            exit;
         }
         $post_insert = $db->prepare("INSERT INTO posts (title, body, author, image, category_id) VALUES (:title, :body, :author, :image, :category_id)");
-        $post_insert->execute(["title" => $title, "body" => $body, "author" => $author, "image" => $image, "category_id => $category_id"]);
+        $result = $post_insert->execute(["title" => $title, "body" => $body, "author" => $author, "image" => $img_name, "category_id" => $category_id]);
 
         header("location: posts.php");
         exit;
@@ -63,7 +63,7 @@ require("admin-sidebar.php");
             <div class="my-4">
                 <label for="category" class="form-label">Title:</label>
                 <input name="title" type="text" class="form-control" id="category">
-                <input type="hidden" value="<?php echo $id ?>" name="id">
+
             </div>
             <div class="my-4">
                 <label for="author" class="form-label">Author:</label>
@@ -72,7 +72,7 @@ require("admin-sidebar.php");
             <div class="my-4">
                 <label for="Select" class="form-label">Select Category:</label>
                 <select id="Select" class="form-select" name="category">
-                    <option selected>Select a category</option>
+                    <option disabled selected>Select a category</option>
                     <?php
                     foreach ($categories as $category) {
                     ?>

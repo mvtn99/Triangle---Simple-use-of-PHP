@@ -56,7 +56,7 @@ $categories = $db->query($query_categories);
                         <td><?php echo $post["title"] ?></td>
                         <td><?php echo $post["author"] ?></td>
                         <td>
-                            <a class="btn btn-outline-info" href="editpost.php?post=<?php echo $post["id"] ?>">Edit</a>
+                            <a class="btn btn-outline-info" href="editpost.php?id=<?php echo $post["id"] ?>">Edit</a>
                             <a class="btn btn-outline-danger" href="dashboard.php?action=delete&entity=post&id=<?php echo $post["id"] ?>">Delete</a>
                         </td>
                     </tr>
@@ -84,7 +84,7 @@ $categories = $db->query($query_categories);
                         <td><?php echo $category["id"] ?></td>
                         <td><?php echo $category["name"] ?></td>
                         <td>
-                            <a class="btn btn-outline-info" href="editcategory.php?post=<?php echo $category["id"] ?>">Edit</a>
+                            <a class="btn btn-outline-info" href="editcategory.php?id=<?php echo $category["id"] ?>">Edit</a>
                             <a class="btn btn-outline-danger" href="dashboard.php?action=delete&entity=category&id=<?php echo $category["id"] ?>">Delete</a>
                         </td>
                     </tr>

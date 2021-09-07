@@ -37,7 +37,7 @@ if (isset($_GET["id"])) {
                         <td><?php echo $post["title"] ?></td>
                         <td><?php echo $post["author"] ?></td>
                         <td>
-                            <a class="btn btn-outline-info" href="editpost.php?post=<?php echo $post["id"] ?>">Edit</a>
+                            <a class="btn btn-outline-info" href="editpost.php?id=<?php echo $post["id"] ?>">Edit</a>
                             <a class="btn btn-outline-danger" href="posts.php?id=<?php echo $post["id"] ?>">Delete</a>
                         </td>
                     </tr>

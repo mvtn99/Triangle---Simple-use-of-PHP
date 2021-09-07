@@ -1,6 +1,6 @@
 <?php
 require("admin-header.php");
-require("admin-sidebar.php");
+
 
 $query_categories = "SELECT * FROM categories";
 $categories = $db->query($query_categories);
@@ -17,8 +17,8 @@ if (isset($_GET["id"]) && isset($_GET["action"])) {
             var_dump($result);
         } else {
 ?>
-            <div class="col">
-                <div class="alert alert-success">
+            <div class="col text-center">
+                <div class="alert alert-danger">
                     You must enter a name!!
                 </div>
             </div>
@@ -31,6 +31,7 @@ if (isset($_GET["id"]) && isset($_GET["action"])) {
         exit;
     }
 }
+require("admin-sidebar.php");
 ?>
 
 <div class="col-9">
