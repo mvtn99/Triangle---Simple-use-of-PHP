@@ -1,9 +1,7 @@
 <?php
 require("config.php");
-if (!isset($_SESSION["email"])) {
-    header("location: login.php?err=You Must Login First");
-    exit;
-}
+require("database.php");
+check_login();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,5 +1,6 @@
 <?php
 require("config.php");
+require("database.php");
 
 if (isset($_SESSION["email"])) {
     header("location: dashboard.php");

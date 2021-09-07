@@ -1,4 +1,6 @@
-<?php require("header.php");
+<?php
+require("header.php");
+
 
 if (isset($_GET["post"])) {
     $post_id = $_GET["post"];

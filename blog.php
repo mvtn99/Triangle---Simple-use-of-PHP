@@ -1,6 +1,7 @@
 <?php
 require("header.php");
 
+
 if (isset($_GET["category"])) {
     $query = "SELECT * FROM posts WHERE category_id=$_GET[category]";
     $posts = $db->query($query);
