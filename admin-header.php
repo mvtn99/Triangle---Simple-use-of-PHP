@@ -1,5 +1,9 @@
 <?php
 require("config.php");
+if (!isset($_SESSION["email"])) {
+    header("location: login.php?err=You Must Login First");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +27,7 @@ require("config.php");
     <nav class="navbar navbar-light bg-light fixed-md-nowrap shadow">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="logout.php"><b>Log Out</b></a>
+                <a class="nav-link" href="#"><b> </b></a>
             </li>
         </ul>
         <a class="navbar-brand col-sm-3 col-md-2 me-2" href="home.php">
