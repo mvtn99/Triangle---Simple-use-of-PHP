@@ -2,8 +2,8 @@
 require("admin-header.php");
 
 
-$query_categories = "SELECT * FROM categories";
-$categories = $db->query($query_categories);
+
+$categories = select_category();
 
 if (isset($_GET["id"]) && isset($_GET["action"])) {
     $id = $_GET["id"];
@@ -25,8 +25,7 @@ if (isset($_GET["id"]) && isset($_GET["action"])) {
 <?php
         }
     } else {
-        $query = "DELETE FROM categories WHERE id= $id";
-        $result = $db->query($query);
+        delete_item($id, "category");
         header("location: categories.php");
         exit;
     }

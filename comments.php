@@ -1,9 +1,8 @@
 <?php
 require("admin-header.php");
-require("admin-sidebar.php");
 
-$query_comments = "SELECT * FROM comments";
-$comments = $db->query($query_comments);
+
+$comments = select_comment();
 
 if (isset($_GET["action"]) && isset($_GET["id"])) {
     $action = $_GET["action"];
@@ -13,11 +12,11 @@ if (isset($_GET["action"]) && isset($_GET["id"])) {
         $query->execute(["id" => $id]);
     } else {
 
-        $query = $db->prepare("DELETE FROM comments WHERE id=:id");
-        $query->execute(['id' => $id]);
+        delete_item($id, "comment");
     }
     header("location: comments.php");
 }
+require("admin-sidebar.php");
 ?>
 
 <div class="col-9">

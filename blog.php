@@ -3,15 +3,13 @@ require("header.php");
 
 
 if (isset($_GET["category"])) {
-    $query = "SELECT * FROM posts WHERE category_id=$_GET[category]";
-    $posts = $db->query($query);
+    $posts = select_posts("", $_GET["category"]);
 } else if (isset($_GET["search"])) {
     $keyword = $_GET['search'];
-    $posts = $db->prepare("SELECT * FROM posts WHERE title LIKE :keyword");
-    $posts->execute(['keyword' => "%$keyword%"]);
+    $posts = search($keyword);
 } else {
-    $query = "SELECT * FROM posts";
-    $posts = $db->query($query);
+
+    $posts = select_posts();
 }
 ?>
 
@@ -39,8 +37,7 @@ if (isset($_GET["category"])) {
                     <?php
                     if ($posts->rowCount() > 0) {
                         foreach ($posts as $post) {
-                            $query1 = "SELECT * FROM categories WHERE id=$post[id]";
-                            $category = $db->query($query1)->fetch();
+                            $category = select_category($post["category_id"]);
                             $query2 = "SELECT * FROM comments WHERE post_id=$post[id] AND status=1";
                             $comment = $db->query($query2);
                     ?>

@@ -1,11 +1,9 @@
 <?php
 require("admin-header.php");
-require("admin-sidebar.php");
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $query_category = "SELECT * FROM categories WHERE id=$id";
-    $category = $db->query($query_category)->fetch();
+    $category = select_category($id);
     if (isset($_GET["name"])) {
         $name = $_GET["name"];
         $query = $db->prepare("UPDATE categories SET name= :name WHERE id= :id");
@@ -16,6 +14,7 @@ if (isset($_GET["id"])) {
 } else {
     exit;
 }
+require("admin-sidebar.php");
 ?>
 <div class="col-9">
     <div class="container">

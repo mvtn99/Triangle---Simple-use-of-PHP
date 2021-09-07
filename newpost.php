@@ -2,8 +2,8 @@
 require("admin-header.php");
 
 
-$query_categories = "SELECT * FROM categories";
-$categories = $db->query($query_categories);
+
+$categories = select_category();
 if (isset($_GET["err"])) {
 ?>
     <div class="col text-center">

@@ -1,16 +1,15 @@
 <?php
 require("admin-header.php");
-require("admin-sidebar.php");
 
-$query = "SELECT * FROM posts";
-$posts = $db->query($query);
+$posts = select_posts();
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $query = $db->prepare("DELETE FROM posts WHERE id=:id");
-    $query->execute(['id' => $id]);
+    delete_item($id, "post");
     header("location: posts.php");
+    exit;
 }
+require("admin-sidebar.php");
 ?>
 
 <div class="col-9">

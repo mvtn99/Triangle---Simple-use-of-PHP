@@ -1,8 +1,8 @@
 <?php
-$query = "SELECT * FROM categories";
-$categories = $db->query($query);
-$query = "SELECT * FROM comments";
-$comments = $db->query($query);
+
+$categories = select_category();
+
+$comments = select_comment();
 ?>
 <div class="col-md-3 col-sm-5">
     <div class="sidebar blog-sidebar">
@@ -41,8 +41,8 @@ $comments = $db->query($query);
             <ul class="nav navbar-stacked">
                 <?php
                 foreach ($categories as $category) {
-                    $query = "SELECT * FROM posts WHERE category_id=$category[id]";
-                    $sposts = $db->query($query);
+
+                    $sposts = select_posts("", $category["id"]);
                 ?>
                     <li><a href="blog.php?category=<?php echo $category["id"] ?>"><?php echo $category["name"] ?><span class="pull-right">(<?php echo $sposts->rowCount() ?>)</span></a></li>
                 <?php

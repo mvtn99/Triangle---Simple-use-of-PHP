@@ -1,6 +1,5 @@
 <?php
 require("admin-header.php");
-require("admin-sidebar.php");
 
 if (isset($_GET["action"]) && isset($_GET["entity"]) && isset($_GET["id"])) {
     $entity = $_GET["entity"];
@@ -8,13 +7,12 @@ if (isset($_GET["action"]) && isset($_GET["entity"]) && isset($_GET["id"])) {
     $id = $_GET["id"];
     if ($_GET["action"] == "delete") {
         if ($entity == "post") {
-            $query = $db->prepare("DELETE FROM posts WHERE id= :id");
+            delete_item($id, "post");
         } else if ($entity == "category") {
-            $query = $db->prepare("DELETE FROM categories WHERE id= :id");
+            delete_item($id, "category");
         } else {
-            $query = $db->prepare("DELETE FROM comments WHERE id= :id");
+            delete_item($id, "comment");
         }
-        $query->execute(['id' => $id]);
     } else {
         $query = $db->prepare("UPDATE comments SET status='1' WHERE id= :id");
         $query->execute(["id" => $id]);
@@ -22,13 +20,14 @@ if (isset($_GET["action"]) && isset($_GET["entity"]) && isset($_GET["id"])) {
     header("location: dashboard.php");
     exit;
 }
-$query = "SELECT * FROM posts";
-$posts = $db->query($query);
+
+$posts = select_posts();
 $query_comments = "SELECT * FROM comments WHERE status='0'";
 $comments = $db->query($query_comments);
-$query_categories = "SELECT * FROM categories";
-$categories = $db->query($query_categories);
 
+$categories = select_category();
+
+require("admin-sidebar.php");
 ?>
 <div class="col-9">
     <div class="container">

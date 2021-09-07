@@ -13,10 +13,10 @@ if (isset($_GET["err"])) {
 
 if (isset($_GET["id"])) {
     $post_id = $_GET["id"];
-    $query_post = "SELECT * FROM posts WHERE id=$post_id";
-    $post = $db->query($query_post)->fetch();
-    $query_categories = "SELECT * FROM categories";
-    $categories = $db->query($query_categories);
+
+    $post = select_posts($post_id);
+
+    $categories = select_category();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

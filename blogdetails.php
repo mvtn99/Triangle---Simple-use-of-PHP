@@ -4,13 +4,12 @@ require("header.php");
 
 if (isset($_GET["post"])) {
     $post_id = $_GET["post"];
-    $query_post = "SELECT * FROM posts WHERE id=$post_id";
-    if (!$post = $db->query($query_post)->fetch()) {
+    if (!$post = select_posts($post_id)) {
         header("location: 404.html");
         exit();
     }
     $query_category = "SELECT * FROM categories WHERE id=$post[category_id]";
-    $category = $db->query($query_category)->fetch();
+    $category = select_category($post["category_id"]);
     $query_comment = "SELECT * FROM comments WHERE post_id=$post_id AND status=1";
     $comments = $db->query($query_comment);
 } else {
@@ -76,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="col-md-12 col-sm-12">
                         <div class="single-blog blog-details two-column">
                             <div class="post-thumb">
-                                <a href="#"><img src="images/posts/<?php echo $post["image"] ?>.png" class="img-responsive" alt=""></a>
+                                <a href="#"><img src="images/posts/<?php echo $post["image"] ?>" class="img-responsive" alt=""></a>
                                 <div class="post-overlay">
                                     <span class="uppercase"><a href="#"><?php echo date("d", strtotime($post["date"])) ?><br><small><?php echo substr(date("F", strtotime($post["date"])), 0, 3) ?></small></a></span>
                                 </div>
