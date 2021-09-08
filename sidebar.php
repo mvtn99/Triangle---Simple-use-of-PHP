@@ -2,39 +2,28 @@
 
 $categories = select_category();
 
-$comments = select_comment();
+$query = "SELECT * FROM comments ORDER BY date DESC LIMIT 3";
+$comments = $db->query($query);
 ?>
 <div class="col-md-3 col-sm-5">
     <div class="sidebar blog-sidebar">
         <div class="sidebar-item  recent">
             <h3>Comments</h3>
-            <div class="media">
-                <div class="pull-left">
-                    <a href="#"><img src="images/portfolio/project1.jpg" alt=""></a>
+            <?php
+            foreach ($comments as $comment) {
+            ?>
+                <div class="media">
+                    <div class="pull-left">
+                        <a href="#"><img src="images/portfolio/project1.jpg" alt=""></a>
+                    </div>
+                    <div class="media-body">
+                        <h4><a href="#"><?php echo $comment["text"] ?></a></h4>
+                        <p>posted on <?php echo date("d F Y", strtotime($comment['date'])) ?></p>
+                    </div>
                 </div>
-                <div class="media-body">
-                    <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit,</a></h4>
-                    <p>posted on 07 March 2014</p>
-                </div>
-            </div>
-            <div class="media">
-                <div class="pull-left">
-                    <a href="#"><img src="images/portfolio/project2.jpg" alt=""></a>
-                </div>
-                <div class="media-body">
-                    <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit,</a></h4>
-                    <p>posted on 07 March 2014</p>
-                </div>
-            </div>
-            <div class="media">
-                <div class="pull-left">
-                    <a href="#"><img src="images/portfolio/project3.jpg" alt=""></a>
-                </div>
-                <div class="media-body">
-                    <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit,</a></h4>
-                    <p>posted on 07 March 2014</p>
-                </div>
-            </div>
+            <?php
+            }
+            ?>
         </div>
         <div class="sidebar-item categories">
             <h3>Categories</h3>
@@ -51,16 +40,5 @@ $comments = select_comment();
             </ul>
         </div>
 
-        <div class="sidebar-item popular">
-            <h3>Latest Photos</h3>
-            <ul class="gallery">
-                <li><a href="#"><img src="images/portfolio/popular1.jpg" alt=""></a></li>
-                <li><a href="#"><img src="images/portfolio/popular2.jpg" alt=""></a></li>
-                <li><a href="#"><img src="images/portfolio/popular3.jpg" alt=""></a></li>
-                <li><a href="#"><img src="images/portfolio/popular4.jpg" alt=""></a></li>
-                <li><a href="#"><img src="images/portfolio/popular5.jpg" alt=""></a></li>
-                <li><a href="#"><img src="images/portfolio/popular1.jpg" alt=""></a></li>
-            </ul>
-        </div>
     </div>
 </div>

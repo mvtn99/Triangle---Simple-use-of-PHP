@@ -22,10 +22,10 @@ if (isset($_GET["id"])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (trim($_POST["title"]) != "" && trim($_POST["author"]) != "" && trim($_POST["category"]) != "" && trim($_POST["body"]) != "") {
-        $title = $_POST["title"];
-        $author = $_POST["author"];
-        $category_id = $_POST["category"];
-        $body = $_POST["body"];
+        $title = htmlspecialchars($_POST["title"]);
+        $author = htmlspecialchars($_POST["author"]);
+        $category_id = htmlspecialchars($_POST["category"]);
+        $body = htmlspecialchars($_POST["body"]);
 
         if (trim($_FILES["image"]["name"]) != "") {
             $img_name = $_FILES["image"]["name"];

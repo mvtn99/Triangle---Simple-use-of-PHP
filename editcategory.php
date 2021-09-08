@@ -5,7 +5,7 @@ if (isset($_GET["id"])) {
     $id = $_GET["id"];
     $category = select_category($id);
     if (isset($_GET["name"])) {
-        $name = $_GET["name"];
+        $name = htmlspecialchars($_GET["name"]);
         $query = $db->prepare("UPDATE categories SET name= :name WHERE id= :id");
         $query->execute(["name" => $name, "id" => $id]);
         header("location: categories.php");

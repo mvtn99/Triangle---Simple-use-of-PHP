@@ -2,7 +2,7 @@
 require("admin-header.php");
 
 if (isset($_GET["name"])) {
-    $name = $_GET["name"];
+    $name = htmlspecialchars($_GET["name"]);
     $query = $db->prepare("INSERT INTO categories (name) VALUES (:name)");
     $query->execute(["name" => $name]);
     header("location: categories.php");

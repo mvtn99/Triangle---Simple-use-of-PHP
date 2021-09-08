@@ -12,8 +12,8 @@ $users = $db->query($query_users);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (trim($_POST["email"]) != "" && trim($_POST["password"]) != "") {
-        $email = $_POST["email"];
-        $password = $_POST["password"];
+        $email = htmlspecialchars($_POST["email"]);
+        $password = htmlspecialchars($_POST["password"]);
 
         $user_select = $db->prepare("SELECT * FROM admin WHERE email= :email AND password= :password");
         $user_select->execute(["email" => $email, "password" => $password]);

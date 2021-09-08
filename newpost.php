@@ -17,10 +17,10 @@ if (isset($_GET["err"])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (trim($_POST["title"]) != "" && trim($_POST["author"]) != "" && trim($_POST["category"]) != "" && trim($_POST["body"]) != "" && trim($_FILES["image"]["name"] != "")) {
-        $title = $_POST["title"];
-        $author = $_POST["author"];
-        $category_id = $_POST["category"];
-        $body = $_POST["body"];
+        $title = htmlspecialchars($_POST["title"]);
+        $author = htmlspecialchars($_POST["author"]);
+        $category_id = htmlspecialchars($_POST["category"]);
+        $body = htmlspecialchars($_POST["body"]);
         $img_name = $_FILES["image"]["name"];
         $tmp_name = $_FILES["image"]["tmp_name"];
         if (move_uploaded_file($tmp_name, "./images/posts/$img_name")) {
